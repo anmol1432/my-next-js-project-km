@@ -1,50 +1,45 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useConvexConnectionState } from "convex/react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { signupSchema } from "@/app/schemas/auth";
+import { signinSchema } from "@/app/schemas/auth";
 import { authClient } from "@/lib/auth-client";
 
-export function SignupForm() {
+export function SigninForm() {
   const router = useRouter();
-  const connectionState = useConvexConnectionState();
   const form = useForm({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(signinSchema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = form.handleSubmit(async (values) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     form.clearErrors("email");
     form.clearErrors("root");
-    const toastId = toast.loading("Creating your account...");
+    const toastId = toast.loading("Signing you in...");
 
     try {
-      await authClient.signUp.email({
-        email: values.email.trim().toLowerCase(),
-        name: values.name.trim(),
-        password: values.password,
+      await authClient.signIn.email({
+        email: data.email.trim().toLowerCase(),
+        password: data.password,
       });
 
       form.reset();
-      toast.success("Account created. Redirecting...", { id: toastId });
+      toast.success("Signed in. Redirecting...", { id: toastId });
       router.push("/");
       router.refresh();
     } catch (error) {
@@ -53,14 +48,14 @@ export function SignupForm() {
       const normalizedMessage = message.toLowerCase();
 
       if (
-        normalizedMessage.includes("user already exists") ||
-        normalizedMessage.includes("already exists")
+        normalizedMessage.includes("invalid") ||
+        normalizedMessage.includes("credentials")
       ) {
-        form.setError("email", {
+        form.setError("root", {
           type: "manual",
-          message: "That email is already registered.",
+          message: "Invalid email or password.",
         });
-        toast.error("That email is already registered.", { id: toastId });
+        toast.error("Invalid email or password.", { id: toastId });
         return;
       }
 
@@ -76,19 +71,11 @@ export function SignupForm() {
     <div className="flex min-h-screen items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Create account to get started</CardTitle>
+          <CardTitle>Welcome back</CardTitle>
         </CardHeader>
 
         <CardContent>
           <form onSubmit={onSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label>Full name</Label>
-              <Input {...form.register("name")} />
-              <p className="text-sm text-destructive">
-                {form.formState.errors.name?.message}
-              </p>
-            </div>
-
             <div className="space-y-2">
               <Label>Email</Label>
               <Input type="email" {...form.register("email")} />
@@ -110,20 +97,12 @@ export function SignupForm() {
               className="w-full"
               disabled={form.formState.isSubmitting}
             >
-              {form.formState.isSubmitting ? "Creating account..." : "Sign up"}
+              {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
             </Button>
 
             <p className="text-sm text-muted-foreground">
-              This form now creates a Better Auth account backed by Convex.
+              Enter your email and password to sign in.
             </p>
-
-            {!connectionState.isWebSocketConnected &&
-            connectionState.connectionRetries > 0 ? (
-              <p className="text-sm text-amber-600">
-                Convex is disconnected. Start it with `npm run convex:dev`, then
-                refresh this page before signing up.
-              </p>
-            ) : null}
 
             {form.formState.errors.root?.message ? (
               <p className="text-sm text-destructive">

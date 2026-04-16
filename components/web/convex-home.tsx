@@ -17,8 +17,8 @@ export function ConvexHome() {
             Your Next.js app is connected to Convex.
           </h1>
           <p className="max-w-2xl text-base text-zinc-600 dark:text-zinc-300">
-            New profiles created from the signup screen will appear here
-            automatically through a live Convex query.
+            New Better Auth accounts created from the signup screen sync into
+            this live Convex query automatically.
           </p>
         </div>
 

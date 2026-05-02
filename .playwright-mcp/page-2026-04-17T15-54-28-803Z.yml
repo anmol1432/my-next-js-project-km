@@ -1,0 +1,38 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e4]:
+        - generic [ref=e5]:
+          - link "Next Bros" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - heading "Next Bros" [level=1] [ref=e7]
+          - list [ref=e8]:
+            - link "Home" [ref=e9] [cursor=pointer]:
+              - /url: /
+            - link "About" [ref=e10] [cursor=pointer]:
+              - /url: /about
+            - link "Create" [ref=e11] [cursor=pointer]:
+              - /url: /create
+          - button "Toggle theme" [ref=e13]:
+            - img
+            - generic [ref=e14]: Toggle theme
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]: Convex Ready
+          - heading "Your Next.js app is connected to Convex." [level=1] [ref=e20]
+          - paragraph [ref=e21]: New Better Auth accounts created from the signup screen sync into this live Convex query automatically.
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - paragraph [ref=e24]: Deployment URL
+            - paragraph [ref=e25]: https://dapper-chameleon-541.convex.cloud
+          - generic [ref=e26]:
+            - paragraph [ref=e27]: Recent profiles
+            - paragraph [ref=e28]: ...
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - heading "Live user feed" [level=2] [ref=e31]
+            - paragraph [ref=e32]: Updates reactively from Convex
+          - paragraph [ref=e34]: Connecting to Convex...
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e40] [cursor=pointer]:
+    - img [ref=e41]

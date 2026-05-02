@@ -38,6 +38,7 @@ export default async function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          themes={["light", "dark", "black-white", "system"]}
         >
           <ConvexClientProvider initialToken={initialToken}>
             <main className="mx-auto min-h-screen w-full">{children}</main>

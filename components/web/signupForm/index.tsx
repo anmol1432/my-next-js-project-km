@@ -74,7 +74,7 @@ export function SignupForm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-sm shadow-sm">
         <CardHeader>
           <CardTitle>Create account to get started</CardTitle>
         </CardHeader>

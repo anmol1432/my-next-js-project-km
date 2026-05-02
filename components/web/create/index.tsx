@@ -61,10 +61,10 @@ const CreateSection = () => {
   })
 
   return (
-    <section className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(24,24,27,0.08),transparent_35%),linear-gradient(to_bottom,transparent,rgba(24,24,27,0.04))] px-4 py-10 sm:px-6 lg:px-8">
+    <section className="min-h-screen bg-background px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-sm text-muted-foreground backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground">
             <PenSquare className="size-4" />
             New post workspace
           </div>

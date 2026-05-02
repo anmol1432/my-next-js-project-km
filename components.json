@@ -19,5 +19,11 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
+    "@originui": "https://originui.com/registry/{name}.json",
+    "@cult": "https://cult-ui.com/{name}.json",
+    "@kibo": "https://kibo-ui.com/registry/{name}.json",
+    "@reui": "https://reui.io/r/{name}.json"
+  }
 }
